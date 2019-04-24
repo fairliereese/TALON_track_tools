@@ -15,6 +15,7 @@ import os
 
 # get and format output directory
 def format_odir(odir):
+	print(odir)
 	cwd = os.getcwd()
 
 	# if first character is not /, use cwd to make this an absolute path

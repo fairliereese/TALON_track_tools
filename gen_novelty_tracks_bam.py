@@ -204,7 +204,13 @@ for ind, line in enumerate(cfile):
 	# print('public directory: '+pubdir)
 	# print('url: '+url)
 
-	sfile = bam_to_sam(bfile, odir, bname)
+	# if input was not a samfile
+	ext = os.path.splitext(bfile)[1] 
+	if ext == '.bam':
+		sfile = bam_to_sam(bfile, odir, bname)
+	elif ext == '.sam':
+		print('samfile given instead. skipping sam conversion')
+		sfile = bfile
 
 	# where to output final tracks to
 	if not ind:
@@ -244,7 +250,9 @@ for ind, line in enumerate(cfile):
 
 	# close and remove samfile
 	infile.close()
-	os.remove(sfile)
+
+	if ext == '.bam':
+		os.remove(sfile)
 
 	# close all open files and get sam/bam names
 	for key, ofile in ofiles.items():

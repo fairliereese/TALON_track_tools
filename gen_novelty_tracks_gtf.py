@@ -156,7 +156,6 @@ for ind, line in enumerate(cfile):
         ofiles[c] = open(odir+c+'.gtf', 'w')
 
 infile = open(gtffile, 'r')
-print(infile.name)
 
 gene_line = []
 trans_line = []
@@ -164,8 +163,8 @@ i = 0
 for line in infile:
     temp = line.split('\t')
     # if this is EBV stuff ignore it
-    if temp[0] == 'chrEBV': 
-        continue
+    # if temp[0] == 'chrEBV': 
+    #     continue
     # if we've found a new gene, update the stored gene line
     if temp[2] == 'gene':
         gene_line = line
@@ -222,7 +221,7 @@ infile.close()
 for c, fname in ofiles.items():
     s = write_track(c, gtffile, get_basename(fname)+'.gtf', colors_dict, url)
     tfile.write(s+'\n')
-    print(fname)
+    # print(fname)
 
 # move into odir if it exists
 if os.path.isdir(pubdir):
